@@ -41,7 +41,7 @@ export const Mutation = {
             });
         }
     },
-    updatePet: async (_parent:unknown, args: {id: string, name: string, breed?: string}):Promise<Pet> => {
+    updatePet: async (_parent:unknown, args: {id: string, name: string, breed: string}):Promise<Pet> => {
         try{
             const petUpdate = await PetModel.findById(args.id);
             
@@ -51,13 +51,8 @@ export const Mutation = {
                 });
             }
 
-            if(args.name){
-                petUpdate.name = args.name;
-            }
-
-            if(args.breed){
-                petUpdate.breed = args.breed;
-            }
+            petUpdate.name = args.name;
+            petUpdate.breed = args.breed;
 
             await petUpdate.save();
             
